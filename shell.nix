@@ -7,6 +7,7 @@
       androidenv.androidPkgs_9_0.androidsdk
       glibc
       flutter
+      dart
       android-studio
     ]);
   runScript = "bash";
