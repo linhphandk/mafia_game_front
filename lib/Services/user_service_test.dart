@@ -1,5 +1,4 @@
 import 'package:mafia_game_front/Services/user_service.dart';
-import 'package:test/scaffolding.dart';
 import 'package:test/test.dart';
 
 void main() {
