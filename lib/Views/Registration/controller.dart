@@ -1,9 +1,14 @@
+import 'package:injectable/injectable.dart';
+import 'package:mafia_game_front/Entities/user.dart';
 import 'package:mafia_game_front/Services/user_service.dart';
 
 import '../../Validators/user_validator.dart' as validation;
 
+@injectable
 class RegistrationController {
-  static String? validateEmail(String? email) {
+  UserService userService;
+  RegistrationController(this.userService);
+  String? validateEmail(String? email) {
     if (email == null) {
       return null;
     }
@@ -17,7 +22,7 @@ class RegistrationController {
     }
   }
 
-  static String? validateUsername(String? username) {
+  String? validateUsername(String? username) {
     if (username == null) {
       return null;
     }
@@ -33,7 +38,7 @@ class RegistrationController {
     }
   }
 
-  static String? validatePassword(String? password) {
+  String? validatePassword(String? password) {
     if (password == null) {
       return null;
     }
@@ -50,11 +55,11 @@ class RegistrationController {
     return errors;
   }
 
-  static String? isPasswordMatch(String? password, String? repeatPassword) {
+  String? isPasswordMatch(String? password, String? repeatPassword) {
     return password == repeatPassword ? null : 'Passwords do not match';
   }
 
-  static String? getErrorMessage(validation.PASSWORD_ERROR error) {
+  String? getErrorMessage(validation.PASSWORD_ERROR error) {
     switch (error) {
       case validation.PASSWORD_ERROR.specialCharacter:
         return "has to contain a special character";
@@ -67,6 +72,8 @@ class RegistrationController {
     }
   }
 
-  static void createUser(
-      String email, String username, String password, String repeatPassword) {}
+  void createUser(
+      String email, String username, String password, String repeatPassword) {
+    userService.createUser(email, username, password, repeatPassword);
+  }
 }

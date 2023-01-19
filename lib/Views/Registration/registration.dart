@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+import 'package:mafia_game_front/Services/user_service.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';
 
 class Registration extends StatefulWidget {
-  const Registration({Key? key}) : super(key: key);
+  const Registration(UserService userService, {Key? key}) : super(key: key);
 
   @override
   State<Registration> createState() => _RegistrationState();
 }
 
+@injectable
 class _RegistrationState extends State<Registration> {
   String _email = '';
   String _username = '';

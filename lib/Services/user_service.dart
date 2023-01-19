@@ -1,7 +1,9 @@
+import 'package:injectable/injectable.dart';
 import 'package:mafia_game_front/Validators/user_validator.dart';
 
 import '../Entities/user.dart';
 
+@injectable
 class UserService {
   User? createUser(
       String email, String username, String password, String repeatPassword) {

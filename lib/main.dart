@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mafia_game_front/Views/Registration/registration.dart';
 
+import 'ioc.dart';
+
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 
