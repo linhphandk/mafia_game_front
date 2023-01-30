@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mafia_game_front/Services/user_service.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';
 
 class Registration extends StatefulWidget {
-  const Registration(UserService userService, {Key? key}) : super(key: key);
+  final RegistrationController controller;
+  const Registration(this.controller, {Key? key}) : super(key: key);
 
   @override
   State<Registration> createState() => _RegistrationState();
@@ -16,7 +16,6 @@ class _RegistrationState extends State<Registration> {
   String _username = '';
   String _password = '';
   String _repeatPassword = '';
-
   void setEmail(String email) {
     setState(() {
       _email = email;
@@ -40,7 +39,6 @@ class _RegistrationState extends State<Registration> {
       _repeatPassword = repeatPassword;
     });
   }
-
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -81,7 +79,7 @@ class _RegistrationState extends State<Registration> {
                             onPressed: () => {
                                   if (_formKey.currentState!.validate())
                                     {
-                                      RegistrationController.createUser(_email,
+                                      widget.controller.createUser(_email,
                                           _username, _password, _repeatPassword)
                                     }
                                 },

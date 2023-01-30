@@ -9,6 +9,7 @@
       flutter
       dart
       android-studio
+      protobuf
     ]);
   runScript = "bash";
 }).env

@@ -1,27 +1,21 @@
-import 'package:injectable/injectable.dart';
+
+import 'package:mafia_game_front/Proto/mafia.pbgrpc.dart';
 import 'package:mafia_game_front/Validators/user_validator.dart';
-
+import 'package:mafia_game_front/Proto/mafia.pb.dart';
 import '../Entities/user.dart';
-
-@injectable
+import 'package:protobuf/protobuf.dart';
+import 'package:grpc/grpc.dart';
 class UserService {
-  User? createUser(
+    const UserService();
+    ResponseFuture<RegisterResponse> createUser(
       String email, String username, String password, String repeatPassword) {
-    if (validateEmail(email) != null) {
-      return null;
-    }
-
-    if (validateUsername(username) != null) {
-      return null;
-    }
-
-    if (validatePassword(password).isNotEmpty) {
-      return null;
-    }
-
-    if (password != repeatPassword) {
-      return null;
-    }
-    return User(email, username, password);
+    final channel = ClientChannel('10.0.2.2',
+    port: 50051,
+    options: const ChannelOptions(
+        credentials: ChannelCredentials.insecure()));
+    final client =accountClient(channel,
+    options: CallOptions(timeout: const Duration(seconds: 30)));
+    final result = client.register(UserData(username: username, email: email, password: password));
+    return result;
   }
 }

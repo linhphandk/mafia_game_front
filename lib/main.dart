@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mafia_game_front/Views/Registration/controller.dart';
 import 'package:mafia_game_front/Views/Registration/registration.dart';
+import 'package:mafia_game_front/Services/user_service.dart';
 
-import 'ioc.dart';
 
 void main() {
-  configureDependencies();
   runApp(const MyApp());
 }
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Registration(),
+      home: const Registration(RegistrationController(UserService())),
     );
   }
 }
