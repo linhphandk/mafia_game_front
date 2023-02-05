@@ -3,13 +3,17 @@
 (pkgs.buildFHSUserEnv {
   name = "android-sdk-env";
   targetPkgs = pkgs: (with pkgs;
+let
+  newFlutter = builtins.fetchTarball {
+    url = "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.7.1-stable.tar.xz";
+    sha256 = "NF9zC3i82tvpCWpmakG51Yj4hd2U+EUUvxC5SD0YwuU=";
+  };
+  in
     [
-      androidenv.androidPkgs_9_0.androidsdk
-      glibc
-      flutter
-      dart
       android-studio
-      protobuf
+      newFlutter 
+      git
     ]);
   runScript = "bash";
 }).env
+

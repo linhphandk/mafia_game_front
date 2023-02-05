@@ -4,7 +4,7 @@ import 'package:mafia_game_front/Views/Registration/controller.dart';
 
 class Registration extends StatefulWidget {
   final RegistrationController controller;
-  const Registration(this.controller, {Key? key}) : super(key: key);
+  Registration(this.controller, {Key? key}) : super(key: key);
 
   @override
   State<Registration> createState() => _RegistrationState();
@@ -39,6 +39,7 @@ class _RegistrationState extends State<Registration> {
       _repeatPassword = repeatPassword;
     });
   }
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {

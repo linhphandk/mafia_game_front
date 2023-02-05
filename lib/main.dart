@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';
 import 'package:mafia_game_front/Views/Registration/registration.dart';
 import 'package:mafia_game_front/Services/user_service.dart';
-
+import 'package:mafia_game_front/Proto/mafia.pbgrpc.dart';
 
 void main() {
-  runApp(const MyApp());
+  final channel = ClientChannel('10.0.2.2',
+      port: 50051,
+      options:
+          const ChannelOptions(credentials: ChannelCredentials.insecure()));
+
+    final accountClientInstance = accountClient(channel,
+        options: CallOptions(timeout: const Duration(seconds: 30)));
+
+  runApp(MyApp(accountClientInstance));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final accountClient accountClientInstance;
+  const MyApp(this.accountClientInstance, {Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final userService = UserService(accountClientInstance);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -28,7 +39,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Registration(RegistrationController(UserService())),
+      home: Registration(RegistrationController(userService)),
     );
   }
 }

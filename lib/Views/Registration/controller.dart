@@ -1,11 +1,9 @@
-import 'package:mafia_game_front/Entities/user.dart';
-import 'package:mafia_game_front/Services/user_service.dart';
-
+import '../../Services/user_service.dart';
 import '../../Validators/user_validator.dart' as validation;
 
 class RegistrationController {
   final UserService userService;
-  const RegistrationController(this.userService);
+  RegistrationController(this.userService);
   static String? validateEmail(String? email) {
     if (email == null) {
       return null;
@@ -13,7 +11,7 @@ class RegistrationController {
     final res = validation.validateEmail(email);
 
     switch (res) {
-      case validation.EMAIL_ERROR.invalid:
+      case validation.EmailError.invalid:
         return "Invalid Email";
       default:
         return null;
@@ -27,9 +25,9 @@ class RegistrationController {
     final res = validation.validateUsername(username);
 
     switch (res) {
-      case validation.USERNAME_ERROR.empty:
+      case validation.UsernameError.empty:
         return "Enter username";
-      case validation.USERNAME_ERROR.short:
+      case validation.UsernameError.short:
         return "Username should be longer than 8 characters";
       default:
         return null;
@@ -57,13 +55,13 @@ class RegistrationController {
     return password == repeatPassword ? null : 'Passwords do not match';
   }
 
-  static String? getErrorMessage(validation.PASSWORD_ERROR error) {
+  static String? getErrorMessage(validation.PasswordError error) {
     switch (error) {
-      case validation.PASSWORD_ERROR.specialCharacter:
+      case validation.PasswordError.specialCharacter:
         return "has to contain a special character";
-      case validation.PASSWORD_ERROR.uppercase:
+      case validation.PasswordError.uppercase:
         return "has to container an uppercase letter";
-      case validation.PASSWORD_ERROR.length:
+      case validation.PasswordError.length:
         return "has to be at least 8 characters long";
       default:
         return null;
