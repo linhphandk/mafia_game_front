@@ -20,6 +20,12 @@ class accountClient extends $grpc.Client {
           ($0.UserData value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.RegisterResponse.fromBuffer(value));
+  static final _$uploadProfilePicture =
+      $grpc.ClientMethod<$0.ProfilePicture, $0.ProfilePictureUrl>(
+          '/account/uploadProfilePicture',
+          ($0.ProfilePicture value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.ProfilePictureUrl.fromBuffer(value));
 
   accountClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -29,6 +35,12 @@ class accountClient extends $grpc.Client {
   $grpc.ResponseFuture<$0.RegisterResponse> register($0.UserData request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$register, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.ProfilePictureUrl> uploadProfilePicture(
+      $0.ProfilePicture request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$uploadProfilePicture, request, options: options);
   }
 }
 
@@ -43,6 +55,13 @@ abstract class accountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.UserData.fromBuffer(value),
         ($0.RegisterResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ProfilePicture, $0.ProfilePictureUrl>(
+        'uploadProfilePicture',
+        uploadProfilePicture_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ProfilePicture.fromBuffer(value),
+        ($0.ProfilePictureUrl value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RegisterResponse> register_Pre(
@@ -50,6 +69,13 @@ abstract class accountServiceBase extends $grpc.Service {
     return register(call, await request);
   }
 
+  $async.Future<$0.ProfilePictureUrl> uploadProfilePicture_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.ProfilePicture> request) async {
+    return uploadProfilePicture(call, await request);
+  }
+
   $async.Future<$0.RegisterResponse> register(
       $grpc.ServiceCall call, $0.UserData request);
+  $async.Future<$0.ProfilePictureUrl> uploadProfilePicture(
+      $grpc.ServiceCall call, $0.ProfilePicture request);
 }

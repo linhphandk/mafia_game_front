@@ -9,6 +9,10 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'mafia.pbenum.dart';
+
+export 'mafia.pbenum.dart';
+
 class UserData extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UserData', createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
@@ -157,5 +161,162 @@ class RegisterResponse extends $pb.GeneratedMessage {
   $core.bool hasRefreshToken() => $_has(2);
   @$pb.TagNumber(3)
   void clearRefreshToken() => clearField(3);
+}
+
+class ProfilePictureUrl extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ProfilePictureUrl', createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'url')
+    ..hasRequiredFields = false
+  ;
+
+  ProfilePictureUrl._() : super();
+  factory ProfilePictureUrl({
+    $core.String? url,
+  }) {
+    final _result = create();
+    if (url != null) {
+      _result.url = url;
+    }
+    return _result;
+  }
+  factory ProfilePictureUrl.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ProfilePictureUrl.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ProfilePictureUrl clone() => ProfilePictureUrl()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ProfilePictureUrl copyWith(void Function(ProfilePictureUrl) updates) => super.copyWith((message) => updates(message as ProfilePictureUrl)) as ProfilePictureUrl; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ProfilePictureUrl create() => ProfilePictureUrl._();
+  ProfilePictureUrl createEmptyInstance() => create();
+  static $pb.PbList<ProfilePictureUrl> createRepeated() => $pb.PbList<ProfilePictureUrl>();
+  @$core.pragma('dart2js:noInline')
+  static ProfilePictureUrl getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ProfilePictureUrl>(create);
+  static ProfilePictureUrl? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get url => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set url($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUrl() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUrl() => clearField(1);
+}
+
+class File extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'File', createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false
+  ;
+
+  File._() : super();
+  factory File({
+    $core.List<$core.int>? content,
+  }) {
+    final _result = create();
+    if (content != null) {
+      _result.content = content;
+    }
+    return _result;
+  }
+  factory File.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory File.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  File clone() => File()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  File copyWith(void Function(File) updates) => super.copyWith((message) => updates(message as File)) as File; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static File create() => File._();
+  File createEmptyInstance() => create();
+  static $pb.PbList<File> createRepeated() => $pb.PbList<File>();
+  @$core.pragma('dart2js:noInline')
+  static File getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<File>(create);
+  static File? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get content => $_getN(0);
+  @$pb.TagNumber(1)
+  set content($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasContent() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearContent() => clearField(1);
+}
+
+class ProfilePicture extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ProfilePicture', createEmptyInstance: create)
+    ..e<ProfilePictureFormat>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'format', $pb.PbFieldType.OE, defaultOrMaker: ProfilePictureFormat.jpg, valueOf: ProfilePictureFormat.valueOf, enumValues: ProfilePictureFormat.values)
+    ..aOM<File>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'profileImage', protoName: 'profileImage', subBuilder: File.create)
+    ..hasRequiredFields = false
+  ;
+
+  ProfilePicture._() : super();
+  factory ProfilePicture({
+    ProfilePictureFormat? format,
+    File? profileImage,
+  }) {
+    final _result = create();
+    if (format != null) {
+      _result.format = format;
+    }
+    if (profileImage != null) {
+      _result.profileImage = profileImage;
+    }
+    return _result;
+  }
+  factory ProfilePicture.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ProfilePicture.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ProfilePicture clone() => ProfilePicture()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ProfilePicture copyWith(void Function(ProfilePicture) updates) => super.copyWith((message) => updates(message as ProfilePicture)) as ProfilePicture; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ProfilePicture create() => ProfilePicture._();
+  ProfilePicture createEmptyInstance() => create();
+  static $pb.PbList<ProfilePicture> createRepeated() => $pb.PbList<ProfilePicture>();
+  @$core.pragma('dart2js:noInline')
+  static ProfilePicture getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ProfilePicture>(create);
+  static ProfilePicture? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ProfilePictureFormat get format => $_getN(0);
+  @$pb.TagNumber(1)
+  set format(ProfilePictureFormat v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFormat() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFormat() => clearField(1);
+
+  @$pb.TagNumber(2)
+  File get profileImage => $_getN(1);
+  @$pb.TagNumber(2)
+  set profileImage(File v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProfileImage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfileImage() => clearField(2);
+  @$pb.TagNumber(2)
+  File ensureProfileImage() => $_ensure(1);
 }
 
