@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';
 
@@ -16,6 +17,7 @@ class _RegistrationState extends State<Registration> {
   String _username = '';
   String _password = '';
   String _repeatPassword = '';
+  String? _profileImage;
   void setEmail(String email) {
     setState(() {
       _email = email;
@@ -40,6 +42,33 @@ class _RegistrationState extends State<Registration> {
     });
   }
 
+  void setProfileImage(String? profileImage) {
+    if (profileImage == null) {
+      return;
+    }
+    setState(() {
+      _profileImage = "http://10.0.2.2:4566/images/" + profileImage;
+    });
+  }
+
+  void handleImageTap() {
+    widget.controller.selectImageFromGallery().then((xFile) => {
+          if (xFile != null)
+            {
+              widget.controller
+                  .uploadImage(xFile)
+                  .then((value) => setProfileImage(value))
+            }
+        });
+  }
+
+  void handleRegister() {
+    if (_formKey.currentState!.validate()) {
+      widget.controller.createUser(
+          _email, _username, _password, _repeatPassword, _profileImage);
+    }
+  }
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -52,6 +81,16 @@ class _RegistrationState extends State<Registration> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        GestureDetector(
+                          onTap: handleImageTap,
+                          child: _profileImage == null
+                              ? Image.asset('assets/user.png', width: 100)
+                              : Image.network(
+                                  _profileImage!,
+                                  width: 100,
+                                  height: 100,
+                                ),
+                        ),
                         TextFormField(
                           decoration: const InputDecoration(hintText: "email"),
                           onChanged: setEmail,
@@ -77,13 +116,7 @@ class _RegistrationState extends State<Registration> {
                                 RegistrationController.isPasswordMatch(
                                     _password, repeatPassword)),
                         TextButton(
-                            onPressed: () => {
-                                  if (_formKey.currentState!.validate())
-                                    {
-                                      widget.controller.createUser(_email,
-                                          _username, _password, _repeatPassword)
-                                    }
-                                },
+                            onPressed: handleRegister,
                             child: const Text("Signup")),
                       ],
                     )))));

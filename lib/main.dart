@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';
 import 'package:mafia_game_front/Views/Registration/registration.dart';
 import 'package:mafia_game_front/Services/user_service.dart';
@@ -11,20 +12,21 @@ void main() {
       options:
           const ChannelOptions(credentials: ChannelCredentials.insecure()));
 
-    final accountClientInstance = accountClient(channel,
+  final accountClientInstance = accountClient(channel,
         options: CallOptions(timeout: const Duration(seconds: 30)));
-
-  runApp(MyApp(accountClientInstance));
+  final userService = UserService(accountClientInstance);
+  final imagePicker = ImagePicker();
+  runApp(MyApp(userService, imagePicker));
 }
 
 class MyApp extends StatelessWidget {
-  final accountClient accountClientInstance;
-  const MyApp(this.accountClientInstance, {Key? key}) : super(key: key);
+  final UserService userService;
+  final ImagePicker imagePicker;
+  const MyApp(this.userService, this.imagePicker, {Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final userService = UserService(accountClientInstance);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Registration(RegistrationController(userService)),
+      home: Registration(RegistrationController(userService, imagePicker)),
     );
   }
 }

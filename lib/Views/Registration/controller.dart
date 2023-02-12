@@ -1,9 +1,13 @@
+import 'package:image_picker/image_picker.dart';
+
 import '../../Services/user_service.dart';
 import '../../Validators/user_validator.dart' as validation;
 
 class RegistrationController {
   final UserService userService;
-  RegistrationController(this.userService);
+  final ImagePicker imagePicker;
+
+  RegistrationController(this.userService, this.imagePicker);
   static String? validateEmail(String? email) {
     if (email == null) {
       return null;
@@ -68,8 +72,19 @@ class RegistrationController {
     }
   }
 
-  void createUser(
-      String email, String username, String password, String repeatPassword) {
-    userService.createUser(email, username, password, repeatPassword);
+  Future<String> uploadImage(XFile profileImage) async {
+    return userService
+        .uploadProfilePicture(profileImage)
+        .then((value) => value.url);
+  }
+
+  Future<XFile?> selectImageFromGallery() async {
+    return await imagePicker.pickImage(source: ImageSource.gallery);
+  }
+
+  void createUser(String email, String username, String password,
+      String repeatPassword, String? profileImageName) {
+    userService.createUser(
+        email, username, password, repeatPassword, profileImageName);
   }
 }
