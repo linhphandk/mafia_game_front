@@ -27,11 +27,15 @@ const UserData$json = const {
     const {'1': 'username', '3': 1, '4': 1, '5': 9, '10': 'username'},
     const {'1': 'password', '3': 2, '4': 1, '5': 9, '10': 'password'},
     const {'1': 'email', '3': 3, '4': 1, '5': 9, '10': 'email'},
+    const {'1': 'profileImageName', '3': 4, '4': 1, '5': 9, '9': 0, '10': 'profileImageName', '17': true},
+  ],
+  '8': const [
+    const {'1': '_profileImageName'},
   ],
 };
 
 /// Descriptor for `UserData`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List userDataDescriptor = $convert.base64Decode('CghVc2VyRGF0YRIaCgh1c2VybmFtZRgBIAEoCVIIdXNlcm5hbWUSGgoIcGFzc3dvcmQYAiABKAlSCHBhc3N3b3JkEhQKBWVtYWlsGAMgASgJUgVlbWFpbA==');
+final $typed_data.Uint8List userDataDescriptor = $convert.base64Decode('CghVc2VyRGF0YRIaCgh1c2VybmFtZRgBIAEoCVIIdXNlcm5hbWUSGgoIcGFzc3dvcmQYAiABKAlSCHBhc3N3b3JkEhQKBWVtYWlsGAMgASgJUgVlbWFpbBIvChBwcm9maWxlSW1hZ2VOYW1lGAQgASgJSABSEHByb2ZpbGVJbWFnZU5hbWWIAQFCEwoRX3Byb2ZpbGVJbWFnZU5hbWU=');
 @$core.Deprecated('Use registerResponseDescriptor instead')
 const RegisterResponse$json = const {
   '1': 'RegisterResponse',

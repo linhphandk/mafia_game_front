@@ -18,6 +18,7 @@ class UserData extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'email')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'profileImageName', protoName: 'profileImageName')
     ..hasRequiredFields = false
   ;
 
@@ -26,6 +27,7 @@ class UserData extends $pb.GeneratedMessage {
     $core.String? username,
     $core.String? password,
     $core.String? email,
+    $core.String? profileImageName,
   }) {
     final _result = create();
     if (username != null) {
@@ -36,6 +38,9 @@ class UserData extends $pb.GeneratedMessage {
     }
     if (email != null) {
       _result.email = email;
+    }
+    if (profileImageName != null) {
+      _result.profileImageName = profileImageName;
     }
     return _result;
   }
@@ -86,6 +91,15 @@ class UserData extends $pb.GeneratedMessage {
   $core.bool hasEmail() => $_has(2);
   @$pb.TagNumber(3)
   void clearEmail() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get profileImageName => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set profileImageName($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasProfileImageName() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearProfileImageName() => clearField(4);
 }
 
 class RegisterResponse extends $pb.GeneratedMessage {
