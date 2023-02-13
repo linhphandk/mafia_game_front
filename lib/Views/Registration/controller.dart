@@ -1,4 +1,6 @@
+import 'package:grpc/service_api.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mafia_game_front/Proto/mafia.pb.dart';
 
 import '../../Services/user_service.dart';
 import '../../Validators/user_validator.dart' as validation;
@@ -82,9 +84,9 @@ class RegistrationController {
     return await imagePicker.pickImage(source: ImageSource.gallery);
   }
 
-  void createUser(String email, String username, String password,
-      String repeatPassword, String? profileImageName) {
-    userService.createUser(
+  ResponseFuture<RegisterResponse> createUser(String email, String username,
+      String password, String repeatPassword, String? profileImageName) {
+    return userService.createUser(
         email, username, password, repeatPassword, profileImageName);
   }
 }

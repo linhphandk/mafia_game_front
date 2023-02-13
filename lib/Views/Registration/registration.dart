@@ -106,14 +106,17 @@ class _RegistrationState extends State<Registration> {
                               const InputDecoration(hintText: "password"),
                           onChanged: setPassword,
                           validator: RegistrationController.validatePassword,
+                          obscureText: true,
                         ),
                         TextFormField(
-                            decoration: const InputDecoration(
-                                hintText: "repeat password"),
-                            onChanged: setRepeatPassword,
-                            validator: (repeatPassword) =>
-                                RegistrationController.isPasswordMatch(
-                                    _password, repeatPassword)),
+                          decoration: const InputDecoration(
+                              hintText: "repeat password"),
+                          onChanged: setRepeatPassword,
+                          validator: (repeatPassword) =>
+                              RegistrationController.isPasswordMatch(
+                                  _password, repeatPassword),
+                          obscureText: true,
+                        ),
                         TextButton(
                             onPressed: handleRegister,
                             child: const Text("Signup")),
