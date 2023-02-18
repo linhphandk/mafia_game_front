@@ -1,6 +1,6 @@
 import 'package:grpc/service_api.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mafia_game_front/Proto/mafia.pb.dart';
+import 'package:mafia_game_front/Proto/account.pb.dart';
 
 import '../../Services/user_service.dart';
 import '../../Validators/user_validator.dart' as validation;

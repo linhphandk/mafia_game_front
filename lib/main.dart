@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';
 import 'package:mafia_game_front/Views/Registration/registration.dart';
 import 'package:mafia_game_front/Services/user_service.dart';
-import 'package:mafia_game_front/Proto/mafia.pbgrpc.dart';
+import 'package:mafia_game_front/Proto/account.pbgrpc.dart';
 
 void main() {
   final channel = ClientChannel('10.0.2.2',
@@ -13,7 +13,7 @@ void main() {
           const ChannelOptions(credentials: ChannelCredentials.insecure()));
 
   final accountClientInstance = accountClient(channel,
-        options: CallOptions(timeout: const Duration(seconds: 30)));
+      options: CallOptions(timeout: const Duration(seconds: 30)));
   final userService = UserService(accountClientInstance);
   final imagePicker = ImagePicker();
   runApp(MyApp(userService, imagePicker));

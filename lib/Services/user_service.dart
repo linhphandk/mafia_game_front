@@ -1,5 +1,5 @@
 import 'package:image_picker/image_picker.dart';
-import 'package:mafia_game_front/Proto/mafia.pbgrpc.dart';
+import 'package:mafia_game_front/Proto/account.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
 import 'package:mockito/annotations.dart';
 
