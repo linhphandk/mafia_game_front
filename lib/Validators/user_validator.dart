@@ -1,48 +1,48 @@
-enum USERNAME_ERROR {
+enum UsernameError{
   empty,
   short,
 }
 
-USERNAME_ERROR? validateUsername(String username) {
+UsernameError? validateUsername(String username) {
   if (username.trim().isEmpty) {
-    return USERNAME_ERROR.empty;
+    return UsernameError.empty;
   }
 
   if (username.length < 8) {
-    return USERNAME_ERROR.short;
+    return UsernameError.short;
   }
 
   return null;
 }
 
-enum EMAIL_ERROR {
+enum EmailError {
   invalid,
 }
 
 //ignore: unnecessary_string_escapes
 const emailRegex = r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
 
-EMAIL_ERROR? validateEmail(String email) =>
-    RegExp(emailRegex).hasMatch(email) ? null : EMAIL_ERROR.invalid;
+EmailError? validateEmail(String email) =>
+    RegExp(emailRegex).hasMatch(email) ? null : EmailError.invalid;
 
 const passwordUpperRegex = r"[A-Z]";
 const passwordSpecialChar = r'[!@#$%^&*(),.?":{}|<>]';
 
-enum PASSWORD_ERROR { uppercase, length, specialCharacter }
+enum PasswordError { uppercase, length, specialCharacter }
 
-List<PASSWORD_ERROR> validatePassword(String password) {
-  final List<PASSWORD_ERROR> errors = List.empty(growable: true);
+List<PasswordError> validatePassword(String password) {
+  final List<PasswordError> errors = List.empty(growable: true);
 
   if (!RegExp(passwordUpperRegex).hasMatch(password)) {
-    errors.add(PASSWORD_ERROR.uppercase);
+    errors.add(PasswordError.uppercase);
   }
 
   if (!RegExp(passwordSpecialChar).hasMatch(password)) {
-    errors.add(PASSWORD_ERROR.specialCharacter);
+    errors.add(PasswordError.specialCharacter);
   }
 
   if (password.length < 8) {
-    errors.add(PASSWORD_ERROR.length);
+    errors.add(PasswordError.length);
   }
 
   return errors;

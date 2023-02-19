@@ -1,27 +1,28 @@
-import 'package:injectable/injectable.dart';
-import 'package:mafia_game_front/Validators/user_validator.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mafia_game_front/Proto/account.pbgrpc.dart';
+import 'package:grpc/grpc.dart';
+import 'package:mockito/annotations.dart';
 
-import '../Entities/user.dart';
-
-@injectable
+// Annotation which generates the cat.mocks.dart library and the MockCat class.
+@GenerateNiceMocks([MockSpec<UserService>()])
 class UserService {
-  User? createUser(
-      String email, String username, String password, String repeatPassword) {
-    if (validateEmail(email) != null) {
-      return null;
-    }
+  final accountClient accountClientInstance;
+  UserService(this.accountClientInstance);
 
-    if (validateUsername(username) != null) {
-      return null;
-    }
+  ResponseFuture<RegisterResponse> createUser(String email, String username,
+      String password, String repeatPassword, String? profileImageName) {
+    final result = accountClientInstance.register(UserData(
+        username: username,
+        email: email,
+        password: password,
+        profileImageName: profileImageName));
+    return result;
+  }
 
-    if (validatePassword(password).isNotEmpty) {
-      return null;
-    }
-
-    if (password != repeatPassword) {
-      return null;
-    }
-    return User(email, username, password);
+  Future<ProfilePictureUrl> uploadProfilePicture(XFile image) async {
+    File file = File(content: await image.readAsBytes());
+    ProfilePicture picture = ProfilePicture(profileImage: file);
+    final result = accountClientInstance.uploadProfilePicture(picture);
+    return result;
   }
 }

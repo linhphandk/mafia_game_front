@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mafia_game_front/Views/Registration/controller.dart';
 import 'package:mafia_game_front/Views/Registration/registration.dart';
-
-import 'ioc.dart';
+import 'package:mafia_game_front/Services/user_service.dart';
+import 'package:mafia_game_front/Proto/account.pbgrpc.dart';
 
 void main() {
-  configureDependencies();
-  runApp(const MyApp());
+  final channel = ClientChannel('10.0.2.2',
+      port: 50051,
+      options:
+          const ChannelOptions(credentials: ChannelCredentials.insecure()));
+
+  final accountClientInstance = accountClient(channel,
+      options: CallOptions(timeout: const Duration(seconds: 30)));
+  final userService = UserService(accountClientInstance);
+  final imagePicker = ImagePicker();
+  runApp(MyApp(userService, imagePicker));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final UserService userService;
+  final ImagePicker imagePicker;
+  const MyApp(this.userService, this.imagePicker, {Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -28,7 +41,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Registration(),
+      home: Registration(RegistrationController(userService, imagePicker)),
     );
   }
 }

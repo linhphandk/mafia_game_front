@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mafia_game_front/Services/user_service.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';
 
 class Registration extends StatefulWidget {
-  const Registration(UserService userService, {Key? key}) : super(key: key);
+  final RegistrationController controller;
+  Registration(this.controller, {Key? key}) : super(key: key);
 
   @override
   State<Registration> createState() => _RegistrationState();
@@ -16,7 +16,7 @@ class _RegistrationState extends State<Registration> {
   String _username = '';
   String _password = '';
   String _repeatPassword = '';
-
+  String? _profileImage;
   void setEmail(String email) {
     setState(() {
       _email = email;
@@ -41,6 +41,33 @@ class _RegistrationState extends State<Registration> {
     });
   }
 
+  void setProfileImage(String? profileImage) {
+    if (profileImage == null) {
+      return;
+    }
+    setState(() {
+      _profileImage = "http://10.0.2.2:4566/images/" + profileImage;
+    });
+  }
+
+  void handleImageTap() {
+    widget.controller.selectImageFromGallery().then((xFile) => {
+          if (xFile != null)
+            {
+              widget.controller
+                  .uploadImage(xFile)
+                  .then((value) => setProfileImage(value))
+            }
+        });
+  }
+
+  void handleRegister() {
+    if (_formKey.currentState!.validate()) {
+      widget.controller.createUser(
+          _email, _username, _password, _repeatPassword, _profileImage);
+    }
+  }
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -53,6 +80,16 @@ class _RegistrationState extends State<Registration> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        GestureDetector(
+                          onTap: handleImageTap,
+                          child: _profileImage == null
+                              ? Image.asset('assets/user.png', width: 100)
+                              : Image.network(
+                                  _profileImage!,
+                                  width: 100,
+                                  height: 100,
+                                ),
+                        ),
                         TextFormField(
                           decoration: const InputDecoration(hintText: "email"),
                           onChanged: setEmail,
@@ -69,22 +106,19 @@ class _RegistrationState extends State<Registration> {
                               const InputDecoration(hintText: "password"),
                           onChanged: setPassword,
                           validator: RegistrationController.validatePassword,
+                          obscureText: true,
                         ),
                         TextFormField(
-                            decoration: const InputDecoration(
-                                hintText: "repeat password"),
-                            onChanged: setRepeatPassword,
-                            validator: (repeatPassword) =>
-                                RegistrationController.isPasswordMatch(
-                                    _password, repeatPassword)),
+                          decoration: const InputDecoration(
+                              hintText: "repeat password"),
+                          onChanged: setRepeatPassword,
+                          validator: (repeatPassword) =>
+                              RegistrationController.isPasswordMatch(
+                                  _password, repeatPassword),
+                          obscureText: true,
+                        ),
                         TextButton(
-                            onPressed: () => {
-                                  if (_formKey.currentState!.validate())
-                                    {
-                                      RegistrationController.createUser(_email,
-                                          _username, _password, _repeatPassword)
-                                    }
-                                },
+                            onPressed: handleRegister,
                             child: const Text("Signup")),
                       ],
                     )))));

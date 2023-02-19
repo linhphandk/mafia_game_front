@@ -1,44 +1,46 @@
-import 'package:injectable/injectable.dart';
-import 'package:mafia_game_front/Entities/user.dart';
-import 'package:mafia_game_front/Services/user_service.dart';
+import 'package:grpc/service_api.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mafia_game_front/Proto/account.pb.dart';
 
+import '../../Services/user_service.dart';
 import '../../Validators/user_validator.dart' as validation;
 
-@injectable
 class RegistrationController {
-  UserService userService;
-  RegistrationController(this.userService);
-  String? validateEmail(String? email) {
+  final UserService userService;
+  final ImagePicker imagePicker;
+
+  RegistrationController(this.userService, this.imagePicker);
+  static String? validateEmail(String? email) {
     if (email == null) {
       return null;
     }
     final res = validation.validateEmail(email);
 
     switch (res) {
-      case validation.EMAIL_ERROR.invalid:
+      case validation.EmailError.invalid:
         return "Invalid Email";
       default:
         return null;
     }
   }
 
-  String? validateUsername(String? username) {
+  static String? validateUsername(String? username) {
     if (username == null) {
       return null;
     }
     final res = validation.validateUsername(username);
 
     switch (res) {
-      case validation.USERNAME_ERROR.empty:
+      case validation.UsernameError.empty:
         return "Enter username";
-      case validation.USERNAME_ERROR.short:
+      case validation.UsernameError.short:
         return "Username should be longer than 8 characters";
       default:
         return null;
     }
   }
 
-  String? validatePassword(String? password) {
+  static String? validatePassword(String? password) {
     if (password == null) {
       return null;
     }
@@ -55,25 +57,36 @@ class RegistrationController {
     return errors;
   }
 
-  String? isPasswordMatch(String? password, String? repeatPassword) {
+  static String? isPasswordMatch(String? password, String? repeatPassword) {
     return password == repeatPassword ? null : 'Passwords do not match';
   }
 
-  String? getErrorMessage(validation.PASSWORD_ERROR error) {
+  static String? getErrorMessage(validation.PasswordError error) {
     switch (error) {
-      case validation.PASSWORD_ERROR.specialCharacter:
+      case validation.PasswordError.specialCharacter:
         return "has to contain a special character";
-      case validation.PASSWORD_ERROR.uppercase:
+      case validation.PasswordError.uppercase:
         return "has to container an uppercase letter";
-      case validation.PASSWORD_ERROR.length:
+      case validation.PasswordError.length:
         return "has to be at least 8 characters long";
       default:
         return null;
     }
   }
 
-  void createUser(
-      String email, String username, String password, String repeatPassword) {
-    userService.createUser(email, username, password, repeatPassword);
+  Future<String> uploadImage(XFile profileImage) async {
+    return userService
+        .uploadProfilePicture(profileImage)
+        .then((value) => value.url);
+  }
+
+  Future<XFile?> selectImageFromGallery() async {
+    return await imagePicker.pickImage(source: ImageSource.gallery);
+  }
+
+  ResponseFuture<RegisterResponse> createUser(String email, String username,
+      String password, String repeatPassword, String? profileImageName) {
+    return userService.createUser(
+        email, username, password, repeatPassword, profileImageName);
   }
 }
