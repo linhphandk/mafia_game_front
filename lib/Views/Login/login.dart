@@ -14,6 +14,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   String _email = '';
   String _password = '';
+  String? _loginError;
   void setEmail(String email) {
     setState(() {
       _email = email;
@@ -26,8 +27,24 @@ class _LoginState extends State<Login> {
     });
   }
 
+  void setLoginError(String? errorMessage) {
+    setState(() {
+      _loginError = errorMessage;
+    });
+  }
+
   void handleLogin() {
-    widget.controller.login(_email, _password).then((p0) =>{print(p0)});
+    widget.controller.login(_email, _password).catchError((error) {
+      switch (error.message) {
+        case "record not found":
+          setLoginError("Wrong username or password");
+          break;
+        default:
+          setLoginError("Something went wrong");
+          break;
+      }
+      return 42;
+    });
   }
 
   void registerHandler() {
@@ -60,6 +77,7 @@ class _LoginState extends State<Login> {
                                 onChanged: setPassword,
                                 obscureText: true,
                               ),
+                              if (_loginError != null) Text(_loginError!),
                               TextButton(
                                   onPressed: handleLogin,
                                   child: const Text("Log in")),
