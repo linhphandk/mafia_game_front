@@ -68,6 +68,10 @@ class _RegistrationState extends State<Registration> {
     }
   }
 
+  void navigateSignup() {
+    Navigator.pushNamed(context, '/home');
+  }
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -75,52 +79,59 @@ class _RegistrationState extends State<Registration> {
         body: Center(
             child: Padding(
                 padding: const EdgeInsets.all(16),
-                child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: handleImageTap,
-                          child: _profileImage == null
-                              ? Image.asset('assets/user.png', width: 100)
-                              : Image.network(
-                                  _profileImage!,
-                                  width: 100,
-                                  height: 100,
-                                ),
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(hintText: "email"),
-                          onChanged: setEmail,
-                          validator: RegistrationController.validateEmail,
-                        ),
-                        TextFormField(
-                          decoration:
-                              const InputDecoration(hintText: "username"),
-                          onChanged: setUsername,
-                          validator: RegistrationController.validateUsername,
-                        ),
-                        TextFormField(
-                          decoration:
-                              const InputDecoration(hintText: "password"),
-                          onChanged: setPassword,
-                          validator: RegistrationController.validatePassword,
-                          obscureText: true,
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                              hintText: "repeat password"),
-                          onChanged: setRepeatPassword,
-                          validator: (repeatPassword) =>
-                              RegistrationController.isPasswordMatch(
-                                  _password, repeatPassword),
-                          obscureText: true,
-                        ),
-                        TextButton(
-                            onPressed: handleRegister,
-                            child: const Text("Signup")),
-                      ],
-                    )))));
+                child: Column(children: [
+                  Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: handleImageTap,
+                            child: _profileImage == null
+                                ? Image.asset('assets/user.png', width: 100)
+                                : Image.network(
+                                    _profileImage!,
+                                    width: 100,
+                                    height: 100,
+                                  ),
+                          ),
+                          TextFormField(
+                            decoration:
+                                const InputDecoration(hintText: "email"),
+                            onChanged: setEmail,
+                            validator: RegistrationController.validateEmail,
+                          ),
+                          TextFormField(
+                            decoration:
+                                const InputDecoration(hintText: "username"),
+                            onChanged: setUsername,
+                            validator: RegistrationController.validateUsername,
+                          ),
+                          TextFormField(
+                            decoration:
+                                const InputDecoration(hintText: "password"),
+                            onChanged: setPassword,
+                            validator: RegistrationController.validatePassword,
+                            obscureText: true,
+                          ),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                                hintText: "repeat password"),
+                            onChanged: setRepeatPassword,
+                            validator: (repeatPassword) =>
+                                RegistrationController.isPasswordMatch(
+                                    _password, repeatPassword),
+                            obscureText: true,
+                          ),
+                          TextButton(
+                              onPressed: handleRegister,
+                              child: const Text("Sign up")),
+                        ],
+                      )),
+                  GestureDetector(
+                    child: const Text("Switch to log in"),
+                    onTap: navigateSignup,
+                  )
+                ]))));
   }
 }

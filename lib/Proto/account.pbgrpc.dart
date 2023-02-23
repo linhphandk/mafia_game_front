@@ -26,6 +26,22 @@ class accountClient extends $grpc.Client {
           ($0.ProfilePicture value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.ProfilePictureUrl.fromBuffer(value));
+  static final _$checkEmail =
+      $grpc.ClientMethod<$0.UserEmail, $0.CheckEmailResponse>(
+          '/account/checkEmail',
+          ($0.UserEmail value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.CheckEmailResponse.fromBuffer(value));
+  static final _$checkUsername =
+      $grpc.ClientMethod<$0.Username, $0.CheckUsernameResponse>(
+          '/account/checkUsername',
+          ($0.Username value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.CheckUsernameResponse.fromBuffer(value));
+  static final _$login = $grpc.ClientMethod<$0.UserLoginData, $0.LoginResponse>(
+      '/account/login',
+      ($0.UserLoginData value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.LoginResponse.fromBuffer(value));
 
   accountClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -41,6 +57,22 @@ class accountClient extends $grpc.Client {
       $0.ProfilePicture request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$uploadProfilePicture, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.CheckEmailResponse> checkEmail($0.UserEmail request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$checkEmail, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.CheckUsernameResponse> checkUsername(
+      $0.Username request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$checkUsername, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.LoginResponse> login($0.UserLoginData request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$login, request, options: options);
   }
 }
 
@@ -62,6 +94,27 @@ abstract class accountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ProfilePicture.fromBuffer(value),
         ($0.ProfilePictureUrl value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UserEmail, $0.CheckEmailResponse>(
+        'checkEmail',
+        checkEmail_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UserEmail.fromBuffer(value),
+        ($0.CheckEmailResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.Username, $0.CheckUsernameResponse>(
+        'checkUsername',
+        checkUsername_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.Username.fromBuffer(value),
+        ($0.CheckUsernameResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UserLoginData, $0.LoginResponse>(
+        'login',
+        login_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UserLoginData.fromBuffer(value),
+        ($0.LoginResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RegisterResponse> register_Pre(
@@ -74,8 +127,29 @@ abstract class accountServiceBase extends $grpc.Service {
     return uploadProfilePicture(call, await request);
   }
 
+  $async.Future<$0.CheckEmailResponse> checkEmail_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.UserEmail> request) async {
+    return checkEmail(call, await request);
+  }
+
+  $async.Future<$0.CheckUsernameResponse> checkUsername_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.Username> request) async {
+    return checkUsername(call, await request);
+  }
+
+  $async.Future<$0.LoginResponse> login_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.UserLoginData> request) async {
+    return login(call, await request);
+  }
+
   $async.Future<$0.RegisterResponse> register(
       $grpc.ServiceCall call, $0.UserData request);
   $async.Future<$0.ProfilePictureUrl> uploadProfilePicture(
       $grpc.ServiceCall call, $0.ProfilePicture request);
+  $async.Future<$0.CheckEmailResponse> checkEmail(
+      $grpc.ServiceCall call, $0.UserEmail request);
+  $async.Future<$0.CheckUsernameResponse> checkUsername(
+      $grpc.ServiceCall call, $0.Username request);
+  $async.Future<$0.LoginResponse> login(
+      $grpc.ServiceCall call, $0.UserLoginData request);
 }
