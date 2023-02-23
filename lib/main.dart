@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mafia_game_front/Views/Login/controller.dart';
+import 'package:mafia_game_front/Views/Login/login.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';
 import 'package:mafia_game_front/Views/Registration/registration.dart';
 import 'package:mafia_game_front/Services/user_service.dart';
@@ -41,7 +43,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Registration(RegistrationController(userService, imagePicker)),
+      home: Login(LoginController(userService)),
+//      home: (context) => Login(LoginController(userService)),
+      routes: {
+        '/register': (context) =>
+            Registration(RegistrationController(userService, imagePicker)),
+        '/home': (context) => Login(LoginController(userService)),
+      },
     );
   }
 }

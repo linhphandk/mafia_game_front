@@ -48,6 +48,34 @@ const RegisterResponse$json = const {
 
 /// Descriptor for `RegisterResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List registerResponseDescriptor = $convert.base64Decode('ChBSZWdpc3RlclJlc3BvbnNlEg4KAmlkGAEgASgJUgJpZBIgCgthY2Nlc3NUb2tlbhgCIAEoCVILYWNjZXNzVG9rZW4SIgoMcmVmcmVzaFRva2VuGAMgASgJUgxyZWZyZXNoVG9rZW4=');
+@$core.Deprecated('Use userLoginDataDescriptor instead')
+const UserLoginData$json = const {
+  '1': 'UserLoginData',
+  '2': const [
+    const {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
+    const {'1': 'password', '3': 2, '4': 1, '5': 9, '10': 'password'},
+  ],
+};
+
+/// Descriptor for `UserLoginData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userLoginDataDescriptor = $convert.base64Decode('Cg1Vc2VyTG9naW5EYXRhEhQKBWVtYWlsGAEgASgJUgVlbWFpbBIaCghwYXNzd29yZBgCIAEoCVIIcGFzc3dvcmQ=');
+@$core.Deprecated('Use loginResponseDescriptor instead')
+const LoginResponse$json = const {
+  '1': 'LoginResponse',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    const {'1': 'username', '3': 2, '4': 1, '5': 9, '10': 'username'},
+    const {'1': 'profileImage', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'profileImage', '17': true},
+    const {'1': 'accessToken', '3': 4, '4': 1, '5': 9, '10': 'accessToken'},
+    const {'1': 'refreshToken', '3': 5, '4': 1, '5': 9, '10': 'refreshToken'},
+  ],
+  '8': const [
+    const {'1': '_profileImage'},
+  ],
+};
+
+/// Descriptor for `LoginResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List loginResponseDescriptor = $convert.base64Decode('Cg1Mb2dpblJlc3BvbnNlEg4KAmlkGAEgASgJUgJpZBIaCgh1c2VybmFtZRgCIAEoCVIIdXNlcm5hbWUSJwoMcHJvZmlsZUltYWdlGAMgASgJSABSDHByb2ZpbGVJbWFnZYgBARIgCgthY2Nlc3NUb2tlbhgEIAEoCVILYWNjZXNzVG9rZW4SIgoMcmVmcmVzaFRva2VuGAUgASgJUgxyZWZyZXNoVG9rZW5CDwoNX3Byb2ZpbGVJbWFnZQ==');
 @$core.Deprecated('Use profilePictureUrlDescriptor instead')
 const ProfilePictureUrl$json = const {
   '1': 'ProfilePictureUrl',
@@ -79,3 +107,43 @@ const ProfilePicture$json = const {
 
 /// Descriptor for `ProfilePicture`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List profilePictureDescriptor = $convert.base64Decode('Cg5Qcm9maWxlUGljdHVyZRItCgZmb3JtYXQYASABKA4yFS5Qcm9maWxlUGljdHVyZUZvcm1hdFIGZm9ybWF0EikKDHByb2ZpbGVJbWFnZRgCIAEoCzIFLkZpbGVSDHByb2ZpbGVJbWFnZQ==');
+@$core.Deprecated('Use userEmailDescriptor instead')
+const UserEmail$json = const {
+  '1': 'UserEmail',
+  '2': const [
+    const {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+/// Descriptor for `UserEmail`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userEmailDescriptor = $convert.base64Decode('CglVc2VyRW1haWwSFAoFZW1haWwYASABKAlSBWVtYWls');
+@$core.Deprecated('Use usernameDescriptor instead')
+const Username$json = const {
+  '1': 'Username',
+  '2': const [
+    const {'1': 'username', '3': 1, '4': 1, '5': 9, '10': 'username'},
+  ],
+};
+
+/// Descriptor for `Username`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List usernameDescriptor = $convert.base64Decode('CghVc2VybmFtZRIaCgh1c2VybmFtZRgBIAEoCVIIdXNlcm5hbWU=');
+@$core.Deprecated('Use checkEmailResponseDescriptor instead')
+const CheckEmailResponse$json = const {
+  '1': 'CheckEmailResponse',
+  '2': const [
+    const {'1': 'exists', '3': 1, '4': 1, '5': 8, '10': 'exists'},
+  ],
+};
+
+/// Descriptor for `CheckEmailResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List checkEmailResponseDescriptor = $convert.base64Decode('ChJDaGVja0VtYWlsUmVzcG9uc2USFgoGZXhpc3RzGAEgASgIUgZleGlzdHM=');
+@$core.Deprecated('Use checkUsernameResponseDescriptor instead')
+const CheckUsernameResponse$json = const {
+  '1': 'CheckUsernameResponse',
+  '2': const [
+    const {'1': 'exists', '3': 1, '4': 1, '5': 8, '10': 'exists'},
+  ],
+};
+
+/// Descriptor for `CheckUsernameResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List checkUsernameResponseDescriptor = $convert.base64Decode('ChVDaGVja1VzZXJuYW1lUmVzcG9uc2USFgoGZXhpc3RzGAEgASgIUgZleGlzdHM=');

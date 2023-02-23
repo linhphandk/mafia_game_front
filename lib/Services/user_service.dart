@@ -19,6 +19,14 @@ class UserService {
     return result;
   }
 
+  ResponseFuture<LoginResponse> login(String email, String password) {
+    final result = accountClientInstance.login(UserLoginData(
+      email: email,
+      password: password,
+    ));
+    return result;
+  }
+
   Future<ProfilePictureUrl> uploadProfilePicture(XFile image) async {
     File file = File(content: await image.readAsBytes());
     ProfilePicture picture = ProfilePicture(profileImage: file);
