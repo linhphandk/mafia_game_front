@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "335662223704",
+    "project_id": "mafia-game-f1a5b",
+    "storage_bucket": "mafia-game-f1a5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335662223704:android:e09bc16556c9ddc052952d",
+        "android_client_info": {
+          "package_name": "com.example.mafia_game_front"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "335662223704-fms8aii3u1956qlmaqbevbc47ti4qj7a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mafia_game_front",
+            "certificate_hash": "f6c5234481ab5e90612e19a045fc5887cb1d124e"
+          }
+        },
+        {
+          "client_id": "335662223704-oqepk5tfvolpgbhgj65sk8975tm36v0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWYE2aV72U5n-0h283ZNwE-i8nNw3jVD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "335662223704-oqepk5tfvolpgbhgj65sk8975tm36v0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

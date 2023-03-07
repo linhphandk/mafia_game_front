@@ -20,6 +20,17 @@ const ProfilePictureFormat$json = const {
 
 /// Descriptor for `ProfilePictureFormat`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List profilePictureFormatDescriptor = $convert.base64Decode('ChRQcm9maWxlUGljdHVyZUZvcm1hdBIHCgNqcGcQABIHCgNwbmcQARIICgR3ZWJwEAI=');
+@$core.Deprecated('Use socialTypeDescriptor instead')
+const SocialType$json = const {
+  '1': 'SocialType',
+  '2': const [
+    const {'1': 'appleAuth', '2': 0},
+    const {'1': 'googleAuth', '2': 1},
+  ],
+};
+
+/// Descriptor for `SocialType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List socialTypeDescriptor = $convert.base64Decode('CgpTb2NpYWxUeXBlEg0KCWFwcGxlQXV0aBAAEg4KCmdvb2dsZUF1dGgQAQ==');
 @$core.Deprecated('Use userDataDescriptor instead')
 const UserData$json = const {
   '1': 'UserData',
@@ -147,3 +158,13 @@ const CheckUsernameResponse$json = const {
 
 /// Descriptor for `CheckUsernameResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List checkUsernameResponseDescriptor = $convert.base64Decode('ChVDaGVja1VzZXJuYW1lUmVzcG9uc2USFgoGZXhpc3RzGAEgASgIUgZleGlzdHM=');
+@$core.Deprecated('Use socialUserDataDescriptor instead')
+const SocialUserData$json = const {
+  '1': 'SocialUserData',
+  '2': const [
+    const {'1': 'authToken', '3': 1, '4': 1, '5': 9, '10': 'authToken'},
+  ],
+};
+
+/// Descriptor for `SocialUserData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List socialUserDataDescriptor = $convert.base64Decode('Cg5Tb2NpYWxVc2VyRGF0YRIcCglhdXRoVG9rZW4YASABKAlSCWF1dGhUb2tlbg==');

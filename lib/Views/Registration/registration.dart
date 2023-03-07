@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:grpc/grpc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mafia_game_front/Proto/account.pbgrpc.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';
 
 class Registration extends StatefulWidget {
@@ -17,6 +20,7 @@ class _RegistrationState extends State<Registration> {
   String _password = '';
   String _repeatPassword = '';
   String? _profileImage;
+  String? _registrationError;
   void setEmail(String email) {
     setState(() {
       _email = email;
@@ -50,6 +54,12 @@ class _RegistrationState extends State<Registration> {
     });
   }
 
+  void setRegistrationError(String? errorText) {
+    setState(() {
+      _registrationError = errorText;
+    });
+  }
+
   void handleImageTap() {
     widget.controller.selectImageFromGallery().then((xFile) => {
           if (xFile != null)
@@ -66,6 +76,33 @@ class _RegistrationState extends State<Registration> {
       widget.controller.createUser(
           _email, _username, _password, _repeatPassword, _profileImage);
     }
+  }
+
+  void handleSignUpGoogle() async {
+    final res =
+        await widget.controller.handleGoogleSignin().catchError((error) {
+      setRegistrationError("Something went wrong ...");
+      return Future.value(null);
+    });
+
+    final serverAuthCode = res?.serverAuthCode;
+    if (serverAuthCode == null) {
+      setRegistrationError("Google account not found");
+      return;
+    }
+
+    await widget.controller
+        .registerGoogleUser(
+      serverAuthCode,
+    )
+        .catchError((error) {
+      if (error.runtimeType == GrpcError) {
+        setRegistrationError("Something went wrong ...");
+        return Future<LoginResponse>.value(LoginResponse());
+      }
+      setRegistrationError("Something went wrong ...");
+      return Future<LoginResponse>.error(error);
+    });
   }
 
   void navigateSignup() {
@@ -123,6 +160,10 @@ class _RegistrationState extends State<Registration> {
                                     _password, repeatPassword),
                             obscureText: true,
                           ),
+                          Text(_registrationError ?? ''),
+                          TextButton(
+                              onPressed: handleSignUpGoogle,
+                              child: const Text("Google")),
                           TextButton(
                               onPressed: handleRegister,
                               child: const Text("Sign up")),

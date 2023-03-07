@@ -1,3 +1,4 @@
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grpc/service_api.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mafia_game_front/Proto/account.pb.dart';
@@ -88,5 +89,13 @@ class RegistrationController {
       String password, String repeatPassword, String? profileImageName) {
     return userService.createUser(
         email, username, password, repeatPassword, profileImageName);
+  }
+
+  Future<GoogleSignInAccount?> handleGoogleSignin() {
+    return userService.signUpGoogle();
+  }
+
+  ResponseFuture<LoginResponse> registerGoogleUser(String serverAuthCode) {
+    return userService.createGoogleUser(serverAuthCode);
   }
 }

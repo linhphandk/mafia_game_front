@@ -26,3 +26,18 @@ class ProfilePictureFormat extends $pb.ProtobufEnum {
   const ProfilePictureFormat._($core.int v, $core.String n) : super(v, n);
 }
 
+class SocialType extends $pb.ProtobufEnum {
+  static const SocialType appleAuth = SocialType._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'appleAuth');
+  static const SocialType googleAuth = SocialType._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'googleAuth');
+
+  static const $core.List<SocialType> values = <SocialType> [
+    appleAuth,
+    googleAuth,
+  ];
+
+  static final $core.Map<$core.int, SocialType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static SocialType? valueOf($core.int value) => _byValue[value];
+
+  const SocialType._($core.int v, $core.String n) : super(v, n);
+}
+

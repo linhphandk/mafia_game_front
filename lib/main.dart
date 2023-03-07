@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mafia_game_front/Vendors/Socials.dart';
 import 'package:mafia_game_front/Views/Login/controller.dart';
 import 'package:mafia_game_front/Views/Login/login.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';
@@ -13,10 +15,16 @@ void main() {
       port: 50051,
       options:
           const ChannelOptions(credentials: ChannelCredentials.insecure()));
+  final googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+    ],
+  );
 
+  final socialsInstance = Socials(googleSignIn);
   final accountClientInstance = accountClient(channel,
       options: CallOptions(timeout: const Duration(seconds: 30)));
-  final userService = UserService(accountClientInstance);
+  final userService = UserService(accountClientInstance, socialsInstance);
   final imagePicker = ImagePicker();
   runApp(MyApp(userService, imagePicker));
 }
