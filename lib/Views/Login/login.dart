@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mafia_game_front/Proto/account.pbgrpc.dart';
 import 'package:mafia_game_front/Views/Login/controller.dart';
 
 class Login extends StatefulWidget {
@@ -15,6 +17,7 @@ class _LoginState extends State<Login> {
   String _email = '';
   String _password = '';
   String? _loginError;
+
   void setEmail(String email) {
     setState(() {
       _email = email;
@@ -51,6 +54,37 @@ class _LoginState extends State<Login> {
     Navigator.pushNamed(context, '/register');
   }
 
+  void handleLoginGoogle() async {
+    final res =
+        await widget.controller.handleGoogleSignin().catchError((error) {
+      print(error);
+      setLoginError("Something went wrong ...");
+      return Future.value(null);
+    });
+
+    final authentication = await res?.authentication;
+    final idToken = authentication?.idToken;
+    if (idToken == null) {
+      setLoginError("Google account not found");
+      return;
+    }
+
+    final user = await widget.controller
+        .loginGoogleUser(
+      idToken,
+    )
+        .catchError((error) {
+      print(error);
+      if (error.runtimeType == GrpcError) {
+        setLoginError("Something went wrong ...");
+        return Future<LoginResponse>.value(LoginResponse());
+      }
+      setLoginError("Something went wrong ...");
+      return Future<LoginResponse>.error(error);
+    });
+    print(user);
+  }
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -81,6 +115,10 @@ class _LoginState extends State<Login> {
                               TextButton(
                                   onPressed: handleLogin,
                                   child: const Text("Log in")),
+                              Text(_loginError ?? ''),
+                              TextButton(
+                                  onPressed: handleLoginGoogle,
+                                  child: const Text("Google")),
                             ],
                           )),
                       GestureDetector(

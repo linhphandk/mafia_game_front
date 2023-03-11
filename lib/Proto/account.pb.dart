@@ -733,3 +733,64 @@ class SocialUserData extends $pb.GeneratedMessage {
   void clearAuthToken() => clearField(1);
 }
 
+class SocialLoginData extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SocialLoginData', createEmptyInstance: create)
+    ..e<SocialType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'socialType', $pb.PbFieldType.OE, protoName: 'socialType', defaultOrMaker: SocialType.appleAuth, valueOf: SocialType.valueOf, enumValues: SocialType.values)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'idToken', protoName: 'idToken')
+    ..hasRequiredFields = false
+  ;
+
+  SocialLoginData._() : super();
+  factory SocialLoginData({
+    SocialType? socialType,
+    $core.String? idToken,
+  }) {
+    final _result = create();
+    if (socialType != null) {
+      _result.socialType = socialType;
+    }
+    if (idToken != null) {
+      _result.idToken = idToken;
+    }
+    return _result;
+  }
+  factory SocialLoginData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SocialLoginData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SocialLoginData clone() => SocialLoginData()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SocialLoginData copyWith(void Function(SocialLoginData) updates) => super.copyWith((message) => updates(message as SocialLoginData)) as SocialLoginData; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SocialLoginData create() => SocialLoginData._();
+  SocialLoginData createEmptyInstance() => create();
+  static $pb.PbList<SocialLoginData> createRepeated() => $pb.PbList<SocialLoginData>();
+  @$core.pragma('dart2js:noInline')
+  static SocialLoginData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SocialLoginData>(create);
+  static SocialLoginData? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  SocialType get socialType => $_getN(0);
+  @$pb.TagNumber(1)
+  set socialType(SocialType v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSocialType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSocialType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get idToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set idToken($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasIdToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIdToken() => clearField(2);
+}
+

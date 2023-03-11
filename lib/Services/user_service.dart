@@ -2,7 +2,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mafia_game_front/Proto/account.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
-import 'package:mafia_game_front/Vendors/Socials.dart';
+import 'package:mafia_game_front/Vendors/socials.dart';
 import 'package:mockito/annotations.dart';
 
 // Annotation which generates the cat.mocks.dart library and the MockCat class.
@@ -46,9 +46,9 @@ class UserService {
     return _socials.signUpGoogle();
   }
 
-  ResponseFuture<LoginResponse> validateGoogleUser(
-      GoogleSignInAccount account) {
-    final request = SocialUserData(authToken: account.serverAuthCode);
-    return _accountClientInstance.createSocialLogin(request);
+  ResponseFuture<LoginResponse> loginGoogleUser(String idToken) {
+    final request =
+        SocialLoginData(socialType: SocialType.googleAuth, idToken: idToken);
+    return _accountClientInstance.socialLogin(request);
   }
 }

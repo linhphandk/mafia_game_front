@@ -168,3 +168,14 @@ const SocialUserData$json = const {
 
 /// Descriptor for `SocialUserData`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List socialUserDataDescriptor = $convert.base64Decode('Cg5Tb2NpYWxVc2VyRGF0YRIcCglhdXRoVG9rZW4YASABKAlSCWF1dGhUb2tlbg==');
+@$core.Deprecated('Use socialLoginDataDescriptor instead')
+const SocialLoginData$json = const {
+  '1': 'SocialLoginData',
+  '2': const [
+    const {'1': 'socialType', '3': 1, '4': 1, '5': 14, '6': '.SocialType', '10': 'socialType'},
+    const {'1': 'idToken', '3': 2, '4': 1, '5': 9, '10': 'idToken'},
+  ],
+};
+
+/// Descriptor for `SocialLoginData`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List socialLoginDataDescriptor = $convert.base64Decode('Cg9Tb2NpYWxMb2dpbkRhdGESKwoKc29jaWFsVHlwZRgBIAEoDjILLlNvY2lhbFR5cGVSCnNvY2lhbFR5cGUSGAoHaWRUb2tlbhgCIAEoCVIHaWRUb2tlbg==');

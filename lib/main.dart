@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mafia_game_front/Vendors/Socials.dart';
+import 'package:mafia_game_front/Vendors/socials.dart';
 import 'package:mafia_game_front/Views/Login/controller.dart';
 import 'package:mafia_game_front/Views/Login/login.dart';
 import 'package:mafia_game_front/Views/Registration/controller.dart';

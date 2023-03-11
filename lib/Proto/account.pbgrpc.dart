@@ -47,6 +47,11 @@ class accountClient extends $grpc.Client {
           '/account/createSocialLogin',
           ($0.SocialUserData value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.LoginResponse.fromBuffer(value));
+  static final _$socialLogin =
+      $grpc.ClientMethod<$0.SocialLoginData, $0.LoginResponse>(
+          '/account/socialLogin',
+          ($0.SocialLoginData value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.LoginResponse.fromBuffer(value));
 
   accountClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -84,6 +89,11 @@ class accountClient extends $grpc.Client {
       $0.SocialUserData request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createSocialLogin, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.LoginResponse> socialLogin($0.SocialLoginData request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$socialLogin, request, options: options);
   }
 }
 
@@ -133,6 +143,13 @@ abstract class accountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.SocialUserData.fromBuffer(value),
         ($0.LoginResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SocialLoginData, $0.LoginResponse>(
+        'socialLogin',
+        socialLogin_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SocialLoginData.fromBuffer(value),
+        ($0.LoginResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RegisterResponse> register_Pre(
@@ -165,6 +182,11 @@ abstract class accountServiceBase extends $grpc.Service {
     return createSocialLogin(call, await request);
   }
 
+  $async.Future<$0.LoginResponse> socialLogin_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.SocialLoginData> request) async {
+    return socialLogin(call, await request);
+  }
+
   $async.Future<$0.RegisterResponse> register(
       $grpc.ServiceCall call, $0.UserData request);
   $async.Future<$0.ProfilePictureUrl> uploadProfilePicture(
@@ -177,4 +199,6 @@ abstract class accountServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.UserLoginData request);
   $async.Future<$0.LoginResponse> createSocialLogin(
       $grpc.ServiceCall call, $0.SocialUserData request);
+  $async.Future<$0.LoginResponse> socialLogin(
+      $grpc.ServiceCall call, $0.SocialLoginData request);
 }

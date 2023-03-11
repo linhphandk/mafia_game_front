@@ -17,7 +17,7 @@ class LoginController {
     return userService.signUpGoogle();
   }
 
-  ResponseFuture<LoginResponse> loginGoogleUser(GoogleSignInAccount account) {
-    return userService.validateGoogleUser(account);
+  ResponseFuture<LoginResponse> loginGoogleUser(String idToken) {
+    return userService.loginGoogleUser(idToken);
   }
 }
