@@ -36,8 +36,8 @@ class _LoginState extends State<Login> {
     });
   }
 
-  void handleLogin() {
-    widget.controller.login(_email, _password).catchError((error) {
+  void handleLogin() async {
+   await widget.controller.login(_email, _password).catchError((error) {
       switch (error.message) {
         case "record not found":
           setLoginError("Wrong username or password");
@@ -46,7 +46,9 @@ class _LoginState extends State<Login> {
           setLoginError("Something went wrong");
           break;
       }
-      return 42;
+      return Future<LoginResponse>.value(error);
+    }).then((res) {
+      widget.controller.persistLoginResponse(res.id,res.username,res.profileImage,res.accessToken,res.refreshToken);
     });
   }
 
