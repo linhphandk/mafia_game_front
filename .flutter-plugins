@@ -1,10 +1,10 @@
 # This is a generated file; do not edit or check into version control.
-flutter_plugin_android_lifecycle=/home/pc/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.7/
-google_sign_in=/home/pc/.pub-cache/hosted/pub.dev/google_sign_in-6.0.2/
-google_sign_in_android=/home/pc/.pub-cache/hosted/pub.dev/google_sign_in_android-6.1.7/
-google_sign_in_ios=/home/pc/.pub-cache/hosted/pub.dev/google_sign_in_ios-5.6.0/
-google_sign_in_web=/home/pc/.pub-cache/hosted/pub.dev/google_sign_in_web-0.11.0+1/
-image_picker=/home/pc/.pub-cache/hosted/pub.dev/image_picker-0.8.6+2/
-image_picker_android=/home/pc/.pub-cache/hosted/pub.dev/image_picker_android-0.8.5+6/
-image_picker_for_web=/home/pc/.pub-cache/hosted/pub.dev/image_picker_for_web-2.1.10/
-image_picker_ios=/home/pc/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.6+8/
+flutter_plugin_android_lifecycle=/home/linh/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.9/
+google_sign_in=/home/linh/.pub-cache/hosted/pub.dev/google_sign_in-6.0.2/
+google_sign_in_android=/home/linh/.pub-cache/hosted/pub.dev/google_sign_in_android-6.1.8/
+google_sign_in_ios=/home/linh/.pub-cache/hosted/pub.dev/google_sign_in_ios-5.6.1/
+google_sign_in_web=/home/linh/.pub-cache/hosted/pub.dev/google_sign_in_web-0.11.0+2/
+image_picker=/home/linh/.pub-cache/hosted/pub.dev/image_picker-0.8.7/
+image_picker_android=/home/linh/.pub-cache/hosted/pub.dev/image_picker_android-0.8.6+1/
+image_picker_for_web=/home/linh/.pub-cache/hosted/pub.dev/image_picker_for_web-2.1.12/
+image_picker_ios=/home/linh/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+1/
